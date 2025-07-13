@@ -31,14 +31,16 @@
          <H2>DESA/KELURAHAN</H2>
 
        </div>
-    @foreach ($dataaparatur as $aparatur)
+    @foreach ($aparatur_desas as $aparatur)
 
-    @endforeach
+
        <figure class="figure">
-         <img src="{{asset('storage/gambar/' .$aparatur->gambar_struktur )}}" class="figure-img img-fluid rounded" alt="...">
+         <img src="{{asset('storage/' .$aparatur->gambar_struktur )}}" class="figure-img img-fluid rounded" alt="...">
 
        </figure>
+       @endforeach
    </div>
+
 
        </section>
 

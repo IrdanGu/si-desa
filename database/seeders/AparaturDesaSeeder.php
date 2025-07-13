@@ -13,8 +13,8 @@ class AparaturDesaSeeder extends Seeder
      */
     public function run(): void
     {
-        AparaturDesa::create([
-            'gambar_struktur' => 'aparatur.png'
-        ]);
+        // AparaturDesa::create([
+        //     'gambar_struktur' => 'aparatur.png'
+        // ]);
     }
 }

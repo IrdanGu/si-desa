@@ -12,9 +12,19 @@
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 top-social text-right">
                 <ul class="unstyled">
                     <li>
+                        <a href="https://www.instagram.com/pkm_pm" target="_blank">
+                            <i class="fa fa-instagram"></i> pkm_pm_sidesa
+                        </a>
+                    </li>
+
+                    <li>
                      Kab kuningan
                     </li>
+
+
                 </ul>
+
+
             </div>
             <!--/ Top social end -->
         </div>
@@ -29,7 +39,7 @@
             <div class="logo-area clearfix">
                 <div class="logo col-xs-12 col-md-3">
                     <a href="index.html">
-                    <img src="{{asset('constra/images/logo.png')}}" alt="" style="width:207px; margin-top: 2px; margin-right:18px;">
+                    <img src="{{asset('storage/gambar/logomancagar.png')}}" alt="" style="width:207px; margin-top: 2px; margin-right:18px;">
                     </a>
                 </div>
 
@@ -80,34 +90,36 @@
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="/aparatur">Aparatur Desa</a></li>
                                         <li><a href="/visimisi">Visi Misi</a></li>
-                                        <li><a href="#">Potensi desa</a></li>
+                                        <li><a href="/potensidesa">Potensi desa</a></li>
+                                        <li><a href="/infografis">Data Infografis</a></li>
                                     </ul>
                                 </li>
 
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Karang taruna<i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">agenda karangtaruna</a></li>
+                                        <li><a href="/useragenda_karangtaruna">agenda karangtaruna</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Informasi Desa<i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/detailberita">Berita Desa</a></li>
-                                        <li><a href="">Agenda Kegiatan</a></li>
+                                    <li><a href="/userberita">Berita Desa</a></li>
+                                        <li><a href="/useragenda">Agenda Kegiatan</a></li>
                                     </ul>
                                 </li>
 
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pelayanan<i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown-menu" role="menu">
-                                    <li><a href="">Buat Surat</a></li>
+                                    <li><a href="surat">Buat Surat</a></li>
                                     </ul>
                                 </li>
 
-                                <li><a href="/galery">Galery</a></li>
+                                <li><a href="/galery">Galeri</a></li>
 
                             <li><a href="/kontak">Kontak Kami</a></li>
+                            <li><a href="/panduan">Panduan</a></li>
 
                             </ul>
                             <!--/ Nav ul end -->

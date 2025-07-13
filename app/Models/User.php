@@ -44,4 +44,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function isAdmin()
+    {
+        return $this->level === 'admin';
+    }
+
+    /**
+     * Determine if the user is a karang taruna.
+     *
+     * @return bool
+     */
+    public function isKarangTaruna()
+    {
+        return $this->level === 'karangtaruna';
+    }
 }

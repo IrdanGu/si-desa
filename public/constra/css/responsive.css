@@ -93,7 +93,8 @@
     /* top info */
 
     ul.top-info li {
-        padding-right: 12px;
+        padding-right: 0px;
+        text-align: center;
     }
 
     /* Header */
@@ -327,12 +328,16 @@
     .slide-title {
         font-size: 16px;
         line-height: 24px;
+        text-align: center;
+        margin-top: 300px;
     }
 
     .slide-sub-title {
         font-size: 28px;
         line-height: normal;
         margin: 0 0 15px;
+        text-align: center;
+        margin-bottom: 300px;
     }
 
     .slider-description.lead {
@@ -484,16 +489,18 @@
 
     ul.top-info-box {
         float: none;
+        position: center;
+
     }
 
     ul.top-info-box li {
         float: none;
-        margin-left: 40px !important;
+        margin-left: 100px !important;
         border-right: 0;
     }
 
     ul.top-info-box li .info-box {
-        margin-bottom: 15px;
+        margin-bottom: 30px;
     }
 
     ul.top-info-box li .info-box.last {
@@ -727,6 +734,7 @@
     .page-slider .item {
         min-height: 450px;
         background-position: 70% 50%;
+        background-image:;
     }
 
     #main-slide .slider-content {
@@ -741,20 +749,46 @@
         right: 5%;
     }
 
+
     .slide-title-box {
         font-size: 12px;
         line-height: 29px;
+
     }
 
     .slide-title {
         font-size: 16px;
         line-height: 24px;
+        text-align: center;
     }
 
     .slide-sub-title {
-        font-size: 26px;
+        font-size: 13px;
         line-height: normal;
         margin-top: 0;
+        text-align: center;
+        margin-bottom: 280px;
+        margin-left: 40px;
+
+    }
+
+    .carousel-control {
+        font-size: 20px; /* Adjust this size as needed */
+        width: 10px; /* Adjust the width as needed */
+        height: 10px; /* Adjust the height as needed */
+        background: none;
+        margin-top: 230px;
+        text-decoration: none;
+
+    }
+
+    .carousel-control.left,
+    .carousel-control.right {
+        background-image: none;
+        color: #fff; /* Change the color if needed */
+        width: 10px;
+        height: 10px;
+        text-decoration: none;
     }
 
 
@@ -952,7 +986,40 @@
     .coba {
         margin-top: -52px;
     }
+    .text-aparat h4 {
+        font-size: 1.2em;
+    }
 
+    .text-aparat h2 {
+        font-size: 1.5em;
+    }
+
+    .text-aparat .figure {
+        width: 100%;
+
+        margin: 2px 0;
+    }
+
+    .figure-img {
+        width: 100%;
+        height: auto;
+}
+
+.gallery-item {
+    flex: 1 1 calc(40% - 1px); /* Two items per row */
+    max-width: calc(47% - 20px);
+}
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.gallery-item {
+    width: 5%;
+    margin-bottom: -30px;
+}
 
 }
 

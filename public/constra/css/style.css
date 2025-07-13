@@ -30,7 +30,7 @@
 19.   News Single
 20.   Sidebar
 21.   Error page
-  
+
 */
 
 @import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,500,500i,600,600i,700,700i,800|Open+Sans:400,400i,600,600i,700,700i,800);
@@ -40,7 +40,7 @@
 
 body {
     background: #fff;
-    color: #555;
+    color: hsl(0, 0%, 33%);
 }
 
 body,
@@ -150,7 +150,7 @@ a:hover {
 }
 
 a.read-more {
-    color: #ffb600;
+    color: #2b429f;
     font-weight: 700;
     text-transform: uppercase;
 }
@@ -243,7 +243,7 @@ img.pull-right {
     color: #fff;
 }
 
-.dark-bg h2, 
+.dark-bg h2,
 .dark-bg h3{
     color: #fff;
 }
@@ -815,7 +815,7 @@ ul.navbar-nav>li {
 
 ul.navbar-nav>li:hover>a,
 ul.navbar-nav>li.active>a {
-    color: #ffb600;
+    color: #6238e0;
     position: relative;
 }
 
@@ -823,7 +823,7 @@ ul.navbar-nav>li:hover>a:after,
 ul.navbar-nav>li.active>a:after {
     content: '';
     position: absolute;
-    border-bottom: 2px solid #ffb600;
+    border-bottom: 2px solid #6238e0;
 }
 
 ul.navbar-nav>li {
@@ -1130,6 +1130,7 @@ ul.navbar-nav>li.header-get-a-quote:hover>a:after {
 
 #main-slide .slider-content.text-left {
     left: 10%;
+    text-decoration: none;
 }
 
 #main-slide .slider-content.text-right {
@@ -1149,6 +1150,7 @@ ul.navbar-nav>li.header-get-a-quote:hover>a:after {
     background: #ffb600;
     color: #fff;
     display: inline-block;
+    text-decoration: none;
     padding: 0 15px;
     margin: 0 0 10px;
 }
@@ -1718,6 +1720,11 @@ ul.navbar-nav>li.header-get-a-quote:hover>a:after {
     margin: 0;
 }
 
+.orange-text{
+    color: orange;
+    text-decoration: underline;
+}
+
 
 /* Services
 ================================================== */
@@ -1782,7 +1789,7 @@ ul.navbar-nav>li.header-get-a-quote:hover>a:after {
 }
 
 
-/* Service box 
+/* Service box
 
 .ts-service-box .ts-service-icon i {
     font-size: 24px;
@@ -1847,6 +1854,12 @@ ul.navbar-nav>li.header-get-a-quote:hover>a:after {
     margin-bottom: 20px;
     position: relative;
     float: none;
+}
+
+.text-agenda{
+    color: #000000;
+    line-height: 0.2;
+    display: block;
 }
 
 
@@ -3077,7 +3090,13 @@ label {
 /* Meta */
 
 .post-meta {
-    padding-bottom: 10px;
+    margin-bottom: 15px;
+    margin-top: -10px;
+}
+
+.post-meta-berita {
+    margin-bottom: 3px;
+    margin-top: 2px;
 }
 
 .post-meta a {
@@ -3088,12 +3107,14 @@ label {
     color: #ffb600;
 }
 
+.img
+
 .post-meta span {
     margin-right: 10px;
+    font-size: 12px;
     padding-right: 10px;
     border-right: 1px solid #dadada;
-    line-height: 12px;
-    display: inline-block;
+
 }
 
 .post-meta i {
@@ -3104,6 +3125,86 @@ label {
 .post-meta .post-comment {
     border-right: 0;
 }
+
+/*card body berita*/
+.card-body .card-title{
+font-size: 20px;
+
+}
+
+.card-body{
+    margin-bottom: 30px;
+}
+
+
+/*main berita*/
+
+.date-box-berita .card-img-main{
+    width: 100%; /* Make the image take the full width of its container */
+    height: 75px; /* Maintain the aspect ratio */
+    max-height: 100px; /* Set a maximum height */
+    object-fit: cover; /* Cover the container without stretching */
+}
+
+.date-box-berita{
+    background-color: #fff3cd; /* Warna latar belakang lebih terang */
+    color: #f0a500; /* Warna teks lebih gelap */
+    width: 90px; /* Lebar tetap */
+    padding: 0px; /* Padding */
+    text-align: center; /* Teks rata tengah */
+
+    display: inline-block; /* Tampilkan sebagai blok sebaris */
+}
+
+.berita-text .post-meta-date {
+    font-size: 1.1rem; /* Ukuran font untuk tanggal */
+    color: #888;
+}
+
+
+.orange-text {
+    color: #f0a500; /* Warna oranye */
+}
+
+.list-group-item {
+    display: flex; /* Gunakan flexbox */
+    align-items: center; /* Rata tengah secara vertikal */
+    padding: 10px; /* Padding for better spacing */
+    border: 1px solid #ddd; /* Border for better separation */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 10px; /* Margin between items */
+}
+
+.berita-text{
+    margin-left: 10px;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    flex: 1; /* Take up remaining space */
+}
+
+.berita-text .judul-main{
+font-weight: bold;
+
+}
+
+.berita-text .post-meta-date {
+    font-size: 1.1rem; /* Ukuran font untuk tanggal */
+    gap: 5px; /* Adjust the gap value to control spacing between the icon and text */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .post-meta .post-comment .comments-link {
     margin-left: 5px;
@@ -3571,3 +3672,235 @@ label {
 .header-two .logo{
     padding: 28px 0;
 }
+
+
+/* main agenda */
+.date-box {
+    background-color: #fff3cd; /* Warna latar belakang lebih terang */
+    color: #f0a500; /* Warna teks lebih gelap */
+    width: 70px; /* Lebar tetap */
+    padding: 7px; /* Padding */
+    text-align: center; /* Teks rata tengah */
+
+    display: inline-block; /* Tampilkan sebagai blok sebaris */
+}
+
+.date-box .date {
+    font-size: 1.3rem; /* Ukuran font untuk tanggal */
+    font-weight: bold; /* Teks tebal untuk tanggal */
+}
+
+.date-box .year {
+    font-size: 1 rem; /* Ukuran font untuk tahun */
+    font-weight: bold;
+}
+
+.orange-text {
+    color: #f0a500; /* Warna oranye */
+}
+
+.list-group-item {
+    display: flex; /* Gunakan flexbox */
+    align-items: center; /* Rata tengah secara vertikal */
+
+}
+
+.agenda-text{
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+
+.post-metamain {
+    padding-bottom: 2px;
+    margin-top: 2px;
+}
+
+.post-metamain a {
+    color: #303030;
+}
+
+.post-metamain a:hover {
+    color: #ffb600;
+}
+
+.post-metamain span {
+    margin-right: 10px;
+    font-size: 12px;
+    padding-right: 10px;
+    border-right: 1px solid #dadada;
+
+}
+
+.post-metamain i {
+    color: #bbb;
+    margin-right: 3px;
+}
+
+.post-metamain .post-comment {
+    border-right: 0;
+}
+
+.post-metamain .post-date{
+    margin-top: -10px;
+}
+
+.post-metamain .post-comment .comments-link {
+    margin-left: 5px;
+}
+
+/* galery */
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.gallery-item {
+    width: 17%;
+    margin-bottom: 20px;
+    /* flex: 1 1 calc(100% - 20px); /* Adjust as needed for different screen sizes */
+    max-width: calc(30% - 20px);
+}
+
+.gallery-image {
+    width: 100%;
+    height: 80%;
+    display: block;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Main gallery */
+
+.iklan-galeri{
+    border: 1px solid #f0a500; /* Warna oranye */
+
+
+
+}
+
+.fas-camera-icon{
+  background-image: url('images/to/your/icon.png');
+
+}
+.orange-text-galery {
+
+    color: white; /* Warna oranye */
+    background-color: #f0a500;
+    margin: 0; /* Remove any default margin */
+}
+
+
+.gallery-main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust gap to reduce space between items */
+    margin-top: 10px; /* Increased margin for better top spacing */
+}
+
+.gallery-item-main {
+    flex: 1 1 calc(50% - 10px); /* Adjusted flex basis to 50% for two items per row */
+    box-sizing: border-box;
+    margin-bottom: 10px; /* Increased margin for better bottom spacing */
+    position: relative;
+    overflow: hidden;
+    padding-top: 40%; /* Aspect ratio 16:9 for wider images */
+}
+
+.gallery-item-main img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Adjusted width to cover the container */
+    height: 100%; /* Adjusted height to cover the container */
+    object-fit: cover;
+    display: block;
+    border-radius: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* dashboard user kepala desa */
+.sambutan-container {
+    padding: 50px;
+    background-color: #f8f9fa;
+    border: 1px solid #f27f04;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.sambutan-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.sambutan-image {
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.sambutan-text {
+    font-size: 16px;
+    color: #555;
+}
+
+.card_index {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* dashboard user main Agenda Kegiatan */
+.agenda-text-dashboard{
+    margin-top: 4px;
+    margin-left: 0px;
+    padding: 10px; /* Add padding for better spacing */
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: flex-start; /* Align items to the start horizontally */
+    border-radius: 5px; /* Rounded corners for a cleaner look */
+}
+
+/* dashboard user main Agenda Kegiatan karangtaruna */
+.agenda-text-karangtaruna{
+    margin-top: 4px;
+    margin-left: 0px;
+    padding: 10px; /* Add padding for better spacing */
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: flex-start; /* Align items to the start horizontally */
+    border-radius: 5px; /* Rounded corners for a cleaner look */
+
+
+}
+
+/* Visi dan misi */
+.table{
+    text-decoration: none;
+
+
+}
+
+.table tr, td{
+    border: none;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

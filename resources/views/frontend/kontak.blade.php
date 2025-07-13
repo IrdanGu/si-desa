@@ -20,7 +20,7 @@
           </div><!-- Row end -->
        </div><!-- Container end -->
     </div><!-- Banner text end -->
- </div><!-- Banner area end --> 
+ </div><!-- Banner area end -->
 
  <section id="main-container" class="main-container">
     <div class="container">
@@ -37,7 +37,7 @@
                     </span>
                     <div class="ts-service-box-content">
                         <h4>Alamat</h4>
-                        <p>92654, Dusun Data</p>
+                        <p>92654, Desa Mancagar</p>
                     </div>
                 </div>
             </div><!-- Col 1 end -->
@@ -49,7 +49,7 @@
                     </span>
                     <div class="ts-service-box-content">
                         <h4>Email</h4>
-                        <p>Desatompobulu@gmail.com</p>
+                        <p>mancagar123@gmail.com</p>
                     </div>
                 </div>
             </div><!-- Col 2 end -->
@@ -69,5 +69,5 @@
         </div><!-- Content row -->
     </div><!-- Conatiner end -->
 </section><!-- Main container end -->
-<iframe style="width:100%; margin-top:-60px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15896.065969504472!2d120.099276!3d-5.1010335!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x6928729316404b8a!2sKantor%20Desa%20Tompobulu!5e0!3m2!1sen!2sid!4v1602247970900!5m2!1sen!2sid" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+<iframe style="width:100%; margin-top:-60px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7919.89585120423!2d108.58955445!3d-7.015407049999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f12f5b455026f%3A0xf3690d634fbc2c2d!2sMancagar%2C%20Kec.%20Lebakwangi%2C%20Kabupaten%20Kuningan%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1716710325284!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen=" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 @endsection

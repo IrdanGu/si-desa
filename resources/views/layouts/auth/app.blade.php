@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -19,6 +20,17 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+var hamburger = document.querySelector(".navbar-toggler");
+var navMenu = document.querySelector(".navbar-collapse");
+
+hamburger.addEventListener("click", function() {
+    navMenu.classList.toggle("show");
+});
+});
+
+</script>
 
 <body class="my-login-page">
 
@@ -42,6 +54,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
-    <script src="adminlte/dist/js/my-login.js"></script>
+
+
+
+
+
+
 
 </html>
+
+
+

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="brand">
-        <img src="img/logo.jpg" alt="logo">
+        <img src="{{asset('storage/gambar/logos.png')}}" alt="logo">
     </div>
     <div class="card fat">
         <div class="card-body">
@@ -35,6 +35,21 @@
                     </div>
                 </div>
 
+
+                <div class="form-group">
+                    <label for="level">Role</label>
+                    <select id="level" name="level" class="form-control @error('level') is-invalid @enderror" required>
+                        <option value="">Select Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="karangtaruna">Karang Taruna</option>
+                    </select>
+                    @error('level')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
                 <div class="form-group">
                     <div class="custom-checkbox custom-control">
                         <input type="checkbox" name="remember" id="remember" class="custom-control-input">
@@ -50,4 +65,6 @@
             </form>
         </div>
     </div>
+
 @endsection
+

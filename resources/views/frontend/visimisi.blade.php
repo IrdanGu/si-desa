@@ -20,7 +20,7 @@
           </div><!-- Row end -->
        </div><!-- Container end -->
     </div><!-- Banner text end -->
- </div><!-- Banner area end --> 
+ </div><!-- Banner area end -->
 
  <section id="text-visi" class="visi">
    <div class="container">
@@ -28,49 +28,60 @@
        <div class="col-md-12">
          <h3>Visi dan Misi</h3>
          <h1>DESA/KELURAHAN</h1>
- 
+
          <br>
          <br>
- 
+
          <h1 class="underline-text">Visi:</h1>
-         <h4>"Terwujudnya desa maju, aman, damai dan sejahtera"</h4>
- 
+         <h4>"TERWUJUDNYA DESA MANCAGAR YANG AGAMIS,JUJUR,SEJAHTERA DAN BERBUDAYA"</h4>
+
          <br>
- 
+
          <h1 class="underline-text">Misi:</h1>
          <table class="table">
             <tbody>
               <tr>
                 <td>1.</td>
-                <td>Meningkatkan pengetahuan serta keterampilan bagi masyarakat melalui Pembinaan dan Pelatihan di berbagai bidang</td>
+                <td>Membangun kehidupan bergotongroyong secara dinamis dalam segi keagamaan,sosial dan budaya</td>
               </tr>
               <tr>
                 <td>2.</td>
-                <td>Meningkatkan partisipasi masyarakat dalam penggunaan teknologi secara positif demi kemajuan individu dan Desa</td>
+                <td>Mewujudkan Pemerintahan Desa yang jujur dan berwibawa dengan pengambilan keputusan tepat dan bermanfaat</td>
               </tr>
               <tr>
                 <td>3.</td>
-                <td>Meningkatkan kesadaran masyarakat mengenai pentingnya menjaga keamanan lingkungan melalui Siskamling dan peningkatan upaya dini pencegahan tindak pidana pencurian dan kejahatan lainnya</td>
+                <td>Meningkatkan profesionalitas dan kinerja seluruh Perangkat Desa</td>
               </tr>
               <tr>
                 <td>4.</td>
-                <td>Meningkatkan kapasitas Satuan Pelindung Masyarakat SATLINMAS dalam pencegahan dan penanganan masalah keamanan di masyarakat</td>
+                <td>Membangun sarana dan prasarana desa yang memadai</td>
               </tr>
               <tr>
                 <td>5.</td>
-                <td>Mengedepankan musyawarah mufakat untuk penyelesaian berbagai masalah dan perselisihan di masyarakat</td>
+                <td>Mewujudkan dan meningkatkan perekonomian untuk kesejahteraan masyarakat</td>
               </tr>
+
+              <tr>
+                <td>6.</td>
+                <td>Meningkatkan pelayanan kesehatan masyarakat desa yang maksimal</td>
+              </tr>
+
+              <tr>
+                <td>7.</td>
+                <td>Mengedepankan musyawarah untuk mufakat dalam kehidupan sehari-hari baik dengan Pemerintahan Desa dan masyarakat</td>
+              </tr>
+
             </tbody>
           </table>
-          
+
        </div>
      </div>
    </div>
  </section>
- 
 
 
-   
+
+
 
 
 

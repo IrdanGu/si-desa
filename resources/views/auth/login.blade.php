@@ -22,9 +22,9 @@
 
                 <div class="form-group">
                     <label for="password">Password
-                        <a href="forgot.blade.php" class="float-right">
+                        {{-- <a href="forgot.blade.php" class="float-right">
                             Forgot Password?
-                        </a>
+                        </a> --}}
                     </label>
                     <input id="password" type="password"
                         class="form-control @error('password')
@@ -35,13 +35,13 @@
                     </div>
                 </div>
 
-
                 <div class="form-group">
                     <label for="level">Role</label>
                     <select id="level" name="level" class="form-control @error('level') is-invalid @enderror" required>
                         <option value="">Select Role</option>
                         <option value="admin">Admin</option>
                         <option value="karangtaruna">Karang Taruna</option>
+                        <option value="user">User</option>
                     </select>
                     @error('level')
                         <div class="invalid-feedback">
@@ -50,21 +50,22 @@
                     @enderror
                 </div>
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <div class="custom-checkbox custom-control">
                         <input type="checkbox" name="remember" id="remember" class="custom-control-input">
                         <label for="remember" class="custom-control-label">Remember Me</label>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="form-group m-0">
                     <button type="submit" class="btn btn-primary btn-block">
                         Login
                     </button>
                 </div>
+                {{-- <div class="mt-4 text-center">
+                    <a href="{{ route('register.user') }}">Buat Akun Baru</a>
+                </div> --}}
             </form>
         </div>
     </div>
-
 @endsection
-

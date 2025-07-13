@@ -6,7 +6,7 @@ Agenda Karangtaruna
 
 @section('content')
 <div class="col-md-10 mx-auto">
-<form role="form" action="{{route(('agenda_karangtarunaupdate'),$agenda_karangtaruna->judul)}}" method="POST" enctype="multipart/form-data">
+<form role="form" action="{{route(('agenda_karangtarunaupdate'),$agenda_karangtaruna->id)}}" method="POST" enctype="multipart/form-data">
         <div class="card-body">
             @csrf
             @method('PUT')
@@ -37,6 +37,7 @@ Agenda Karangtaruna
                     <div class="invalid-feedback">
                       {{$errors->first('jam')}}
                     </div>
+                  </div>
 
                     <div class="form-group">
                         <label for="acara">Acara</label>
@@ -44,6 +45,7 @@ Agenda Karangtaruna
                         <div class="invalid-feedback">
                           {{$errors->first('acara')}}
                         </div>
+                    </div>
 
                         <div class="form-group">
                             <label for="tempat">Tempat</label>
@@ -51,6 +53,7 @@ Agenda Karangtaruna
                             <div class="invalid-feedback">
                               {{$errors->first('tempat')}}
                             </div>
+                        </div>
 
 
                 <div class="form-group">

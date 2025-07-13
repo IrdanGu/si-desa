@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agenda_karangtaruna;
 use App\Models\Surat;
+use App\Models\Surat_KeteranganDomisili;
 use App\Models\Surat_KeteranganUsaha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,16 +18,18 @@ class AgendaKarangtarunaController extends Controller
     {
     $surat_ktm =Surat::where('is_read', false)->count();
     $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
-
+    $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
     $notifications_sktm = Surat::where('is_read', false)->get();
-    $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-    $notifications = $notifications_sktm->merge($notifications_sku);
+    $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+    $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+    $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
+
     $agenda_karangtaruna = Agenda_karangtaruna::orderBy('created_at', 'desc')->paginate(7);
     $cari = $request->get('keyword');
     if ($cari) {
         $agenda_karangtaruna = Agenda_karangtaruna::where('judul', 'LIKE', "%$cari%")->paginate(7);
     }
-    return view('agenda_karangtaruna.index', compact('agenda_karangtaruna', 'surat_ktm', 'surat_ku', 'notifications'));
+    return view('agenda_karangtaruna.index', compact('agenda_karangtaruna', 'surat_ktm', 'surat_ku','surat_domisili','notifications'));
     }
 
     /**
@@ -37,10 +40,13 @@ class AgendaKarangtarunaController extends Controller
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
 
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
-        return view('agenda_karangtaruna.create',compact('surat_ktm', 'surat_ku', 'notifications'));
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
+
+        return view('agenda_karangtaruna.create',compact('surat_ktm', 'surat_ku','surat_domisili','notifications'));
     }
 
     /**
@@ -48,9 +54,10 @@ class AgendaKarangtarunaController extends Controller
      */
     public function store(Request $request)
     {
-        $judul = $request->get('judul');
+        $id = $request->get('id');
         $agenda_karangtaruna = new Agenda_karangtaruna();
-        $agenda_karangtaruna->judul = $judul;
+        $agenda_karangtaruna->id = $id;
+        $agenda_karangtaruna->judul = $request->get('judul');
         $agenda_karangtaruna->tanggal = date('Y-m-d', strtotime($request->get('tanggal')));
         $agenda_karangtaruna->jam = $request->get('jam');
         $agenda_karangtaruna->acara = $request->get('acara');
@@ -74,27 +81,27 @@ class AgendaKarangtarunaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($judul)
+    public function edit($id)
     {
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
 
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
-        $agenda_karangtaruna = Agenda_karangtaruna::where('judul', $judul)->first();
-        return view('agenda_karangtaruna.edit', compact('agenda_karangtaruna','surat_ktm', 'surat_ku', 'notifications'));
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
+        $agenda_karangtaruna = Agenda_karangtaruna::findOrFail($id);
+        return view('agenda_karangtaruna.edit', compact('agenda_karangtaruna','surat_ktm','surat_ku','surat_domisili','notifications'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $judul)
+    public function update(Request $request, $id)
     {
-
-        $judul = $request->get('judul');
-        $agenda_karangtaruna = Agenda_karangtaruna::where('judul', $judul)->first();
-        $agenda_karangtaruna->judul = $judul;
+        $agenda_karangtaruna = Agenda_karangtaruna::where('id', $id)->first();
+        $agenda_karangtaruna->judul = $request->get('judul');
         $agenda_karangtaruna->tanggal = date('Y-m-d', strtotime($request->get('tanggal')));
         $agenda_karangtaruna->jam = $request->get('jam');
         $agenda_karangtaruna->acara = $request->get('acara');
@@ -108,9 +115,9 @@ class AgendaKarangtarunaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($judul)
+    public function destroy($id)
     {
-        $agenda_karangtaruna = Agenda_karangtaruna::where('judul', $judul)->first();
+        $agenda_karangtaruna = Agenda_karangtaruna::where('judul', $id)->first();
         $agenda_karangtaruna->delete();
         return redirect()->route('agenda_karangtarunaindex');
     }

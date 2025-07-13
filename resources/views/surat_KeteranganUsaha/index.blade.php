@@ -8,9 +8,7 @@
     <div class="card-header">
         <h3 class="card-title"> Surat Keterangan Usaha</h3>
     </div>
-    <div class="card-header">
-        <a class="btn btn-primary" href="{{route('suratcreate')}}">Buat Surat</a>
-    </div>
+
     <div class="card-header">
       <form action="">
         <div class="row">
@@ -32,12 +30,11 @@
       <table id="table-product" class="table table-bordered table-hover ">
         <thead class="table-secondary">
           <tr>
+            <th>No Surat</th>
             <th>NIK</th>
             <th>KK</th>
             <th>Nama</th>
             <th>Jenis Surat</th>
-            <th>Foto KTP</th>
-            <th>Foto KK</th>
             <th>Permohonan</th>
             <th>No Handphone </th>
             <th>Status</th>
@@ -52,12 +49,11 @@
         @foreach ($surat__KeteranganUsaha as $surat_keteranganusahas )
           <tr>
           {{-- <td>@if($surat_keteranganusahas->status == "Approve") @endif</td> --}}
+          <td>510/{{$surat_keteranganusahas->no_surat}}/I/{{ date('Y', strtotime($surat_keteranganusahas->created_at)) }}</td>
           <td>{{$surat_keteranganusahas->nik}}</td>
           <td>{{$surat_keteranganusahas->no_kk}}</td>
           <td>{{$surat_keteranganusahas->nama}}</td>
           <td>{{$surat_keteranganusahas->pilihsurat}}</td>
-          <td><a href="#" data-toggle="modal" data-target="#ktpModal{{$surat_keteranganusahas->id}}"><img src="{{asset('storage/' . $surat_keteranganusahas->fotoktp)}}" width="48px"></a></td>
-          <td><a href="#" data-toggle="modal" data-target="#kkModal{{$surat_keteranganusahas->id}}"><img src="{{asset('storage/' . $surat_keteranganusahas->fotokk)}}" width="48px"></a></td>
           <td>{{$surat_keteranganusahas->permohonan}}</td>
           {{-- <td>
             <a href="#" data-toggle="modal" data-target="#permohonanModal{{$surat_keteranganusahas->id}}">
@@ -67,7 +63,11 @@
 
 
 
-          <td>{{$surat_keteranganusahas->no_hp}}</td>
+        <td>
+            <a href="https://wa.me/{{$surat_keteranganusahas->no_hp}}" target="_blank" class="btn btn-success">
+                {{$surat_keteranganusahas->no_hp}}
+            </a>
+        </td>
           <td> @if($surat_keteranganusahas->status == "Approve")
             <span class="badge badge-success">{{$surat_keteranganusahas->status}}
             @else
@@ -97,6 +97,10 @@
             <button onclick="return confirm('Yakin Approve Surat Ini?')" class="btn btn-primary" type="submit "><i class="fas fa-cancel"></i> Approve</button>
           </form>
           @endif
+          @if ($surat_keteranganusahas->status == "Approve")
+          <a  href="{{route('surat_keteranganusahacetak',$surat_keteranganusahas->id)}}"><button type="submit"  class="btn btn-primary"><i class="fas fa-print"></i>  Cetak</button> </a>
+          @endif
+
           </td>
           </tr>
 

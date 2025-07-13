@@ -15,7 +15,7 @@
     <!-- Carousel inner -->
     <div class="carousel-inner">
 
-    <div class="item active" style="background-image:url({{asset('constra/images/slider-main/fotopaudmancagar.jpg')}})">
+    <div class="item active" style="background-image:url({{asset('constra/images/slider-main/desa.jpg')}})">
             <div class="slider-content">
                 <div class="col-md-12 text-center" style="margin-top: 300px;">
                     <h3 class="slide-sub-title animated5 ">selamat datang di desa mancagar</h3>
@@ -33,7 +33,7 @@
         </div>
         <!--/ Carousel item 2 end -->
 
-        <div class="item" style="background-image:url({{asset('constra/images/slider-main/foto_masjid_mancagar.jpg')}})">
+        <div class="item" style="background-image:url({{asset('constra/images/slider-main/masjid.jpg')}})">
             <div class="slider-content ">
                 <div class="col-md-12 text-center" style="margin-top: 300px;">
                     <h3 class="slide-sub-title animated7">dengan sistem digital</h3>

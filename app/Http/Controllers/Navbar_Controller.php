@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MailNotify;
 
 use App\Models\Surat;
+use App\Models\Surat_KeteranganDomisili;
 use App\Models\Surat_KeteranganUsaha;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
@@ -13,13 +16,15 @@ class Navbar_Controller extends Controller
     public function navbar(){
         $surat_ktm = Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
         $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_ku);
-        return view('adminlte/partial/navbar', compact('surat_ktm', 'surat_ku', 'notifications'));
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
+        return view('adminlte/partial/navbar', compact('surat_ktm','surat_ku','surat_domisili', 'notifications'));
     }
 
-    // public function getSuratCount()
+    // public function getSuratCount()$notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
     // {
     //     return $this->hasMany(Surat_KeteranganUsaha::class);
     // }
@@ -29,9 +34,10 @@ class Navbar_Controller extends Controller
     {
         $surat_ktm = Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
 
 
-        return response()->json(['surat_ktm' => $surat_ktm], ['surat_ku' => $surat_ku]);
+        return response()->json(['surat_ktm' => $surat_ktm], ['surat_ku' => $surat_ku], ['surat_domisili' => $surat_domisili]);
     }
 
     public function markNotificationAsRead(Request $request)
@@ -45,6 +51,8 @@ class Navbar_Controller extends Controller
         $notification = Surat::find($notificationId);
     } elseif ($pilihsurat === 'Surat Keterangan Usaha') {
         $notification = Surat_KeteranganUsaha::find($notificationId);
+    } elseif ($pilihsurat === 'Surat Keterangan Domisili') {
+        $notification = Surat_KeteranganDomisili::find($notificationId);
     } else {
         return response()->json(['success' => false, 'message' => 'Invalid notification type'], 400);
     }
@@ -60,6 +68,4 @@ class Navbar_Controller extends Controller
 
     return response()->json(['success' => false, 'message' => 'Notification not found or does not belong to user'], 404);
 }
-
-
 }

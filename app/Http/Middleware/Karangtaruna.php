@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models;
 
 class Karangtaruna
 {
@@ -19,7 +20,7 @@ class Karangtaruna
          return $next($request);
 
         }
-        return redirect('dashboard');
+        return redirect('/agenda_karangtaruna/index');
     }
 
 }

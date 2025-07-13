@@ -22,7 +22,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'level' =>'required|in:admin,karangtaruna',
+            'level' =>'required|in:admin,karangtaruna,user',
             'password' => ['required', 'min:5', 'max:20'],
 
         ];

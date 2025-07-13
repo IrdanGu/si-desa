@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AgendaKarangtarunaController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\UserRegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StrukturDesaController;
 use App\Http\Controllers\BeritaController;
@@ -17,6 +19,8 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\EmailNotificationController;
+use App\Http\Controllers\KepaladesaControler;
+use App\Http\Controllers\Surat_KeteranganDomisiliController;
 use App\Mail\SuratMasukNotification;
 use Illuminate\Support\Facades\Mail;
 
@@ -79,8 +83,15 @@ Route::get('/login', function () {
 
   Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+  // web.php
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 
   Auth::routes(['register' => false]);
+
+  // Register User Only
+Route::get('/register/user', [UserRegisterController::class, 'showRegisterForm'])->name('register.user');
+Route::post('/register/user', [UserRegisterController::class, 'register'])->name('register.user.submit');
 
 
 
@@ -132,6 +143,7 @@ Route::get('surat', [TampilanuserController::class, 'surat'])->name('surat');
 Route::post('store', [TampilanuserController::class, 'store'])->name('suratsimpan');
 Route::put('store/update/{id}', [TampilanuserController::class, 'update'])->name('surattupdate');
 Route::put('store/updateSKU/{id}', [TampilanuserController::class, 'updateSKU'])->name('suratupdateSKU');
+Route::put('store/updateSKD/{id}', [TampilanuserController::class, 'updateSKD'])->name('suratupdateSKD');
 
 
 
@@ -234,9 +246,9 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('index', [AgendaController::class, 'index'])->name('agendaindex');
         Route::get('create', [AgendaController::class, 'create'])->name('agendacreate');
         Route::post('store', [AgendaController::class, 'store'])->name('agendastore');
-        Route::get('edit/{judul}', [AgendaController::class, 'edit'])->name('agendaedit');
-        Route::put('store/{judul}', [AgendaController::class, 'update'])->name('agendaupdate');
-        Route::delete('delete/{judul}', [AgendaController::class, 'destroy'])->name('agendadelete');
+        Route::get('edit/{id}', [AgendaController::class, 'edit'])->name('agendaedit');
+        Route::put('store/{id}', [AgendaController::class, 'update'])->name('agendaupdate');
+        Route::delete('delete/{id}', [AgendaController::class, 'destroy'])->name('agendadelete');
 
     });
 
@@ -246,9 +258,9 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('index', [AgendaKarangtarunaController::class, 'index'])->name('agenda_karangtarunaindex');
         Route::get('create', [AgendaKarangtarunaController::class, 'create'])->name('agenda_karangtarunacreate');
         Route::post('store', [AgendaKarangtarunaController::class, 'store'])->name('agenda_karangtarunastore');
-        Route::get('edit/{judul}', [AgendaKarangtarunaController::class, 'edit'])->name('agenda_karangtarunaedit');
-        Route::put('store/{judul}', [AgendaKarangtarunaController::class, 'update'])->name('agenda_karangtarunaupdate');
-        Route::delete('delete/{judul}', [AgendaKarangtarunaController::class, 'destroy'])->name('agenda_karangtarunadelete');
+        Route::get('edit/{id}', [AgendaKarangtarunaController::class, 'edit'])->name('agenda_karangtarunaedit');
+        Route::put('store/{id}', [AgendaKarangtarunaController::class, 'update'])->name('agenda_karangtarunaupdate');
+        Route::delete('delete/{id}', [AgendaKarangtarunaController::class, 'destroy'])->name('agenda_karangtarunadelete');
 
     });
 
@@ -277,6 +289,22 @@ Route::group(['middleware' => 'admin'], function(){
 
     });
 
+    Route::group([
+        'prefix' => 'kepaladesa'
+    ], function() {
+        Route::get('index', [KepaladesaControler::class, 'index'])->name('kepaladesaindex');
+        Route::get('create', [KepaladesaControler::class, 'create'])->name('kepaladesacreate');
+        Route::post('store', [KepaladesaControler::class, 'store'])->name('kepaladesastore');
+        Route::get('edit/{id}', [KepaladesaControler::class, 'edit'])->name('kepaladesaedit');
+        Route::put('store/{id}', [KepaladesaControler::class, 'update'])->name('kepaladesaupdate');
+        Route::delete('delete/{id}', [KepaladesaControler::class, 'destroy'])->name('kepaladesadelete');
+
+    });
+
+
+
+
+
     //surat Keterangan Tidak Mampu
 
     Route::group([
@@ -288,6 +316,7 @@ Route::group(['middleware' => 'admin'], function(){
         Route::get('edit/{id}', [SuratController::class, 'edit'])->name('suratedit');
         Route::put('store/{id}', [SuratController::class, 'update'])->name('suratupdate');
         Route::delete('delete/{id}', [SuratController::class, 'destroy'])->name('suratdelete');
+        Route::get('cetak_surat/{id}', [SuratController::class, 'cetak_surat'])->name('suratcetak');
     });
 
 
@@ -304,7 +333,16 @@ Route::group(['middleware' => 'admin'], function(){
         'prefix' => 'surat_keteranganusaha'
     ], function(){
         Route::get('index', [Surat_KeteranganUsahaController::class, 'index'])->name('surat_keteranganusahaindex');
+        Route::get('cetak_surat/{id}', [Surat_KeteranganUsahaController::class, 'cetak_surat'])->name('surat_keteranganusahacetak');
 
+    });
+
+    Route::group([
+        'prefix' => 'surat_keterangandomisili'
+    ], function(){
+        Route::get('index', [Surat_KeteranganDomisiliController::class, 'index'])->name('surat_keterangandomisiliindex');
+        Route::delete('delete/{id}', [Surat_KeteranganDomisiliController::class, 'destroy'])->name('surat_keterangandomisilidelete');
+        Route::get('cetak_surat/{id}', [Surat_KeteranganDomisiliController::class, 'cetak_surat'])->name('surat_keterangandomisilicetak');
     });
 
 //     // ini route untuk halaman user frontend
@@ -329,7 +367,7 @@ Route::group(['middleware' => 'admin'], function(){
 //karangtaruna
 Route::group(['middleware' => 'checkuser'], function(){
 
-    // Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::group([
         'prefix' => 'agenda_karangtaruna'
@@ -355,9 +393,8 @@ Route::group(['middleware' => 'checkuser'], function(){
 
     });
 
+    Route::get('penduduk/{nik}', [PendudukController::class, 'ajax']);
+
 
 
 });
-
-
-

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Surat;
+use App\Models\Surat_KeteranganDomisili;
 use App\Models\Surat_KeteranganUsaha;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -19,10 +21,12 @@ class SuratController extends Controller
 
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
-
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
+
 
 
         if ($status) {
@@ -40,7 +44,7 @@ class SuratController extends Controller
             }
 
         }
-        return view('surat.index', compact('surat', 'surat_ktm', 'surat_ku', 'notifications'));
+        return view('surat.index', compact('surat', 'surat_ktm', 'surat_ku','surat_domisili','notifications'));
     }
 
 
@@ -70,10 +74,7 @@ class SuratController extends Controller
             'no_hp' => 'required',
             'read' => 'in:false,Surat Keterangan Usaha',
             'permohonan' => 'required',
-            'foto_ktp' => 'required_if:pilihsurat,==,Surat Keterangan Tidak Mampu|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'foto_kk' => 'required_if:pilihsurat,==,Surat Keterangan Tidak Mampu|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'fotoktp' => 'required_if:pilihsurat,==,Surat Keterangan Usaha|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'fotokk' => 'required_if:pilihsurat,==,Surat Keterangan Usaha|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
 
 
         ]);
@@ -87,16 +88,6 @@ class SuratController extends Controller
             $surat->nik = $request->get('nik');
                 $surat->no_kk = $request->get('no_kk');
                  $surat->nama = $request->get('nama');
-
-                if ($request->hasFile('foto_ktp')) {
-                    $file = $request->file('foto_ktp')->store('dokumen', 'public');
-                    $surat->foto_ktp = $file;
-                }
-
-                if ($request->hasFile('foto_kk')) {
-                    $file = $request->file('foto_kk')->store('dokumen', 'public');
-                    $surat->foto_kk = $file;
-                }
                 $surat->pilihsurat= $request->get('pilihsurat');
                 $surat->permohonan = $request->get('permohonan');
             $surat->no_hp = $request->get('no_hp');
@@ -116,15 +107,6 @@ class SuratController extends Controller
             $surat->no_kk = $request->get('no_kk');
              $surat->nama = $request->get('nama');
 
-            if ($request->hasFile('fotoktp')) {
-                $file = $request->file('fotoktp')->store('dokumen', 'public');
-                $surat->fotoktp = $file;
-            }
-
-            if ($request->hasFile('fotokk')) {
-                $file = $request->file('fotokk')->store('dokumen', 'public');
-                $surat->fotokk = $file;
-            }
             $surat->pilihsurat= $request->get('pilihsurat');
 
             $surat->permohonan = $request->get('permohonan');
@@ -199,4 +181,31 @@ class SuratController extends Controller
         $surat->delete();
         return redirect()->route('suratindex');
     }
+
+    public function cetak_surat($id)
+    {
+        $surat = Surat::FindOrFail($id);
+
+        // if ($surat_KeteranganDomisili->ttd) {
+        //     $ttd = public_path('storage/' . $surat_KeteranganDomisili->ttd);
+
+        $pdf = Pdf::loadview('surat.cetak', ['surat' => $surat]);
+        return $pdf->stream('surat_keterangan_domisili.pdf');
+    }
+
+    public function upload(Request $request)
+
+    {
+        $folderPath = public_path('upload/');
+        $image_parts = explode(";base64,", $request->signed);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+        $file = $folderPath . uniqid() . '.'.$image_type;
+        file_put_contents($file, $image_base64);
+        return back()->with('success', 'success Full upload signature');
+
+    }
 }
+
+

@@ -20,14 +20,14 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-    
+
 
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/login';
+    // protected $redirectTo = '/agenda_karangtaruna/index';
 
     /**
      * Create a new controller instance.
@@ -46,7 +46,6 @@ class LoginController extends Controller
         $request->session()->regenerate();
         return redirect('/login');
        }
-
 
 
 }

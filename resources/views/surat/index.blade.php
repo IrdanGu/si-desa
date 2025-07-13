@@ -8,9 +8,9 @@
     <div class="card-header">
         <h3 class="card-title"> Surat Keterangan Tidak Mampu</h3>
     </div>
-    <div class="card-header">
+    {{-- <div class="card-header">
         <a class="btn btn-primary" href="{{route('suratcreate')}}">Buat Surat</a>
-    </div>
+    </div> --}}
     <div class="card-header">
       <form action="">
         <div class="row">
@@ -32,17 +32,15 @@
       <table id="table-product" class="table table-bordered table-hover ">
         <thead class="table-secondary">
           <tr>
+            <th>No Surat</th>
             <th>NIK</th>
             <th>KK</th>
             <th>Nama</th>
             <th>Jenis Surat</th>
-            <th>Foto KTP</th>
-            <th>Foto KK</th>
-            <th>Permohonan </th>
+            <th>Permohonan</th>
             <th>No Handphone </th>
             <th>Status</th>
             <th>Pembuat surat</th>
-            <th>Read</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -53,14 +51,17 @@
         @foreach ($surat as $surats )
           <tr>
           {{-- <td>@if($surats->status == "Approve") @endif</td> --}}
+          <td>141/{{$surats->no_surat}}/XII/{{ date('Y', strtotime($surats->created_at)) }}</td>
           <td>{{$surats->nik}}</td>
           <td>{{$surats->no_kk}}</td>
           <td>{{$surats->nama}}</td>
           <td>{{$surats->pilihsurat}}</td>
-          <td><a href="#" data-toggle="modal" data-target="#ktpModal{{$surats->id}}"><img src="{{asset('storage/' . $surats->foto_ktp)}}" width="48px"></a></td>
-          <td><a href="#" data-toggle="modal" data-target="#kkModal{{$surats->id}}"><img src="{{asset('storage/' . $surats->foto_kk)}}" width="48px"></a></td>
           <td>{{$surats->permohonan}}</td>
-          <td>{{$surats->no_hp}}</td>
+          <td>
+            <a href="https://wa.me/{{$surats->no_hp}}" target="_blank" class="btn btn-success">
+                {{$surats->no_hp}}
+            </a>
+        </td>
           <td> @if($surats->status == "Approve")
             <span class="badge badge-success">{{$surats->status}}
             @else
@@ -73,8 +74,6 @@
               {{$surats->nama}}
               @endif
           </td>
-
-           <td>{{$surats->read}}</td>
           <td>
           @if ($surats->status == "Approve")
           <a  href="{{route('suratedit',$surats->id)}}"><button type="submit"  class="btn btn-info"><i class="fas fa-edit"></i> Edit</button> </a>
@@ -91,7 +90,9 @@
             @method('PUT')
             <button onclick="return confirm('Yakin Approve Surat Ini?')" class="btn btn-primary" type="submit "><i class="fas fa-cancel"></i> Approve</button>
           </form>
-
+          @endif
+          @if ($surats->status == "Approve")
+          <a  href="{{route('suratcetak',$surats->id)}}"><button type="submit"  class="btn btn-primary"><i class="fas fa-print"></i>  Cetak</button> </a>
           @endif
           </td>
           </tr>

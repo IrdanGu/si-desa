@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use App\Http\Requests\BeritaRequest;
 use App\Models\Surat;
+use App\Models\Surat_KeteranganDomisili;
 use App\Models\Surat_KeteranganUsaha;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -21,17 +22,18 @@ class BeritaController extends Controller
     {
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
-
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
 
     $berita = Berita::orderBy('created_at', 'desc')->paginate(7);
     $cari = $request->get('keyword');
     if ($cari) {
         $berita = Berita::where('judul', 'LIKE', "%$cari%")->paginate(7);
     }
-    return view('berita.index', compact('berita', 'surat_ktm', 'surat_ku', 'notifications'));
+    return view('berita.index', compact('berita', 'surat_ktm', 'surat_ku','surat_domisili', 'notifications'));
     }
 
     /**
@@ -43,11 +45,13 @@ class BeritaController extends Controller
 
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
-
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
-        return view('berita.create', compact('surat_ktm', 'surat_ku', 'notifications'));
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
+
+        return view('berita.create', compact('surat_ktm', 'surat_ku','surat_domisili','notifications'));
     }
 
     /**
@@ -95,12 +99,13 @@ class BeritaController extends Controller
     {
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
-
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
         $berita = Berita::where('slug', $slug)->first();
-        return view('berita.edit', compact('berita','surat_ktm', 'surat_ku', 'notifications'));
+        return view('berita.edit', compact('berita','surat_ktm','surat_domisili','surat_ku', 'notifications'));
     }
 
     /**

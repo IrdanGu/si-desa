@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GaleryRequest;
 use App\Models\Galery;
 use App\Models\Surat;
+use App\Models\Surat_KeteranganDomisili;
 use App\Models\Surat_KeteranganUsaha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,12 +19,13 @@ class GaleryController extends Controller
     {
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
-
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
         $galery = Galery::all();
-        return view('galery.index', compact('galery','surat_ktm', 'surat_ku', 'notifications'));
+        return view('galery.index', compact('galery','surat_ktm', 'surat_ku','surat_domisili','notifications'));
     }
 
     /**
@@ -33,11 +35,14 @@ class GaleryController extends Controller
     {
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
-
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
-        return view('galery.create', compact('surat_ktm', 'surat_ku', 'notifications'));
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
+
+
+        return view('galery.create', compact('surat_ktm', 'surat_ku', 'surat_domisili', 'notifications'));
     }
 
     /**
@@ -73,16 +78,18 @@ class GaleryController extends Controller
     {
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
-
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
+
 
         $galery = Galery::find($id_galery);
         if ($galery === null) {
             return redirect()->route('galeryindex');
         }
-        return view('galery.edit', compact('galery','surat_ktm', 'surat_ku', 'notifications'));
+        return view('galery.edit', compact('galery','surat_ktm', 'surat_ku','surat_domisili','notifications'));
     }
 
     /**

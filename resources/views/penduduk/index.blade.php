@@ -12,7 +12,7 @@
     <div class="card-header">
         <a class="btn btn-primary" href="{{ route('pendudukcreate') }}">Tambah Data</a>
         <a class="btn btn-primary" href="{{ route('pendudukexport') }}">Export Excel</a>
-        <a class="btn btn-primary" href="{{ route('pendudukexportpdf') }}">Export PDF</a>
+        {{-- <a class="btn btn-primary" href="{{ route('pendudukexportpdf') }}">Export PDF</a> --}}
 
 
         <!-- Button to trigger modal for import -->
@@ -57,8 +57,8 @@
                 <div class="col-md-4 ml-4">
                     <input {{ Request::get('status') == 'nik' ? 'checked' : '' }} class="form-check-input mt-3" type="radio" name="status" value="nik" id="nik">
                     <label class="ml-1" for="nik">NIK</label>
-                    <input {{ Request::get('status') == 'kk' ? 'checked' : '' }} class="form-check-input ml-4 mt-3" type="radio" name="status" value="kk" id="kk">
-                    <label style="margin-top:10px" class="ml-5" for="kk">KK</label>
+                    <input {{ Request::get('status') == 'no_kk' ? 'checked' : '' }} class="form-check-input ml-4 mt-3" type="radio" name="status" value="no_kk" id="no_kk">
+                    <label style="margin-top:10px" class="ml-5" for="no_kk">KK</label>
                     <button type="submit" class="btn btn-primary ml-3 mb-1"><i class="fas fa-search"></i> Cari</button>
                 </div>
             </div>

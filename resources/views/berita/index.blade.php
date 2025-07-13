@@ -59,9 +59,11 @@
       </table>
     </div>
 
-@endsection
 
 <div class="d-flex justify-content-center">
     {{ $berita->links('pagination::bootstrap-4') }}
 </div>
-</div>
+</div>-
+
+
+@endsection

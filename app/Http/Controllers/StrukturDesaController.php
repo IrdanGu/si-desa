@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AparaturRequest;
 use App\Models\AparaturDesa;
 use App\Models\Surat;
+use App\Models\Surat_KeteranganDomisili;
 use App\Models\Surat_KeteranganUsaha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -20,10 +21,13 @@ class StrukturDesaController extends Controller
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
 
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
-        return view('aparatur.index', compact('aparatur_desas', 'surat_ktm', 'surat_ku', 'notifications' ));
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
+
+        return view('aparatur.index', compact('aparatur_desas', 'surat_ktm', 'surat_ku','surat_domisili','notifications' ));
 
             // $dataaparatur = aparaturdesa::all();
             // return view('frontend.aparatur', compact('dataaparatur'));
@@ -37,11 +41,13 @@ class StrukturDesaController extends Controller
     {
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
-
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
-        return view('aparatur.create', compact('aparatur_desas', 'surat_ktm', 'surat_ku', 'notifications' ));
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
+
+        return view('aparatur.create', compact('aparatur_desas', 'surat_ktm', 'surat_ku', 'surat_domisili','notifications' ));
     }
 
     /**
@@ -79,12 +85,14 @@ class StrukturDesaController extends Controller
     {
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
-
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
+
         $aparatur_desas = aparaturdesa::findOrFail($id);
-        return view('aparatur.edit', compact('aparatur_desas', 'surat_ktm', 'surat_ku', 'notifications' ));
+        return view('aparatur.edit', compact('aparatur_desas', 'surat_ktm', 'surat_ku','surat_domisili','notifications' ));
     }
 
     /**

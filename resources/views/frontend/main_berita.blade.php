@@ -67,7 +67,7 @@
                   <!-- Galeri Foto -->
               <div class="iklan-galeri">
                 <h4 class="orange-text-galery">
-                    <i class="fas fa-camera icon"></i> <!-- Ganti ikon sesuai kebutuhan -->
+                    <i class="fa-solid fa-camera"></i> <!-- Ganti ikon sesuai kebutuhan -->
                     Galeri Foto
                 </h4>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use App\Models\Penduduk;
 use App\Models\Surat;
+use App\Models\Surat_KeteranganDomisili;
 use App\Models\Surat_KeteranganUsaha;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,13 +30,15 @@ class DashboardController extends Controller
         $berita = Berita::count();
         $jml_sktm = Surat::count();
         $jml_sku = Surat_KeteranganUsaha::count();
-        $all_surat = $jml_sktm+$jml_sku;
+        $jml_sdm = Surat_KeteranganDomisili::count();
+        $all_surat = $jml_sktm+$jml_sku+$jml_sdm;
         $surat_ktm = Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
-        // $surat = $surat_ktm + $surat_ku;
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
 
         $rt01 = Penduduk::where('rt', '01')->count();
         $rt02 = Penduduk::where('rt', '02')->count();
@@ -107,7 +110,7 @@ class DashboardController extends Controller
         $LK = Penduduk::where('jenis_kelamin', 'LK')->count();
         $jmlpenduduk = Penduduk::count();
         $Kpl = Penduduk::where('hubungan', 'Kpl. Keluarga')->count();
-        return view('dashboard', compact('jmlpenduduk', 'LK', 'P', 'berita', 'user', 'Kpl','surat_ku','surat_ktm','rt01', 'rt02','rt03',
+        return view('dashboard', compact('jmlpenduduk', 'LK', 'P', 'berita', 'user', 'Kpl','surat_ku','surat_ktm','surat_domisili','rt01', 'rt02','rt03',
                                          'rt04','rt05','rt06','rt07', 'rt01LK', 'rt01P','rt02LK','rt02P','rt03LK','rt03P','rt04LK','rt04P','rt05LK','rt05P','rt06LK','rt06P','rt07LK','rt07P', 'blm_sklh', 'tdk_prnh_sklh', 'blm_tamat_sd'
                                         ,'tamat_sd', 'tamat_sltp', 'tamat_slta', 'tamat_s1','brh_h_lepas','pelajar','wiraswasta','m_rmh_tangga','b_harian_lepas','perangkat_desa','belum_bekerja','karyawan_swasta','kawin','blm_kawin','jandud', 'notifications','all_surat','status'));
     }

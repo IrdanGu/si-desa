@@ -44,6 +44,10 @@
                 <input id="level" class="form-check-input" type="radio" name="level" value="karangtaruna"  {{(old('level') == 'karangtaruna') ? 'checked' : ''}}>
                 <label class="form-check-label">Karangtaruna</label>
             </div>
+            <div class="form-check form-check-inline">
+                <input id="level" class="form-check-input" type="radio" name="level" value="user"  {{(old('level') == 'user') ? 'checked' : ''}}>
+                <label class="form-check-label">User</label>
+            </div>
 
                 <div class="invalid-feedback">
                  &emsp;{{$errors->first('level')}}

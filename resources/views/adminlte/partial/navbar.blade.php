@@ -9,10 +9,10 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-            <a class="nav-link" href="#" id="notificationDropdown" data-toggle="dropdown">
+            <a class="nav-link" href="" id="notificationDropdown" data-toggle="dropdown">
                 <i class="far fa-bell"></i>
-                @if($surat_ktm + $surat_ku > 0)
-                    <span id="notification-count" class="badge badge-warning navbar-badge">{{  $surat_ktm + $surat_ku }}</span>
+                @if($surat_ktm + $surat_ku + $surat_domisili > 0)
+                    <span id="notification-count" class="badge badge-warning navbar-badge">{{  $surat_ktm + $surat_ku + $surat_domisili }}</span>
                 @endif
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -27,6 +27,13 @@
                     </a>
                 @elseif($notification instanceof App\Models\Surat_KeteranganUsaha)
                     <a href="{{ route('surat_keteranganusahaindex') }}" class="dropdown-item notification-item" data-id="{{ $notification->id }}">
+                        <i class="fas fa-envelope mr-2"></i> {{ $notification->nama }}
+                        <span class="float-right text-muted text-sm">{{ $notification->created_at->diffForHumans() }}</span>
+
+                    </a>
+
+                    @elseif($notification instanceof App\Models\Surat_KeteranganDomisili)
+                    <a href="{{ route('surat_keterangandomisiliindex') }}" class="dropdown-item notification-item" data-id="{{ $notification->id }}">
                         <i class="fas fa-envelope mr-2"></i> {{ $notification->nama }}
                         <span class="float-right text-muted text-sm">{{ $notification->created_at->diffForHumans() }}</span>
 

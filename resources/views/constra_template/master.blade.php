@@ -18,6 +18,7 @@
 	<!-- CSS
 	================================================== -->
 	<!-- Bootstrap -->
+	<link rel="icon" href="{{asset('storage/gambar/logoman.png')}}" type="image/x-icon"/>
     <link rel="stylesheet" href="{{asset('constra/css/bootstrap.min.css')}}">
 	<!-- Template styles-->
     <link rel="stylesheet" href="{{asset('constra/css/style.css')}}">
@@ -49,10 +50,11 @@
 		@include('constra_template.partial.footer')
 
 
-		<!-- Javascript Files
+		<!-- Javascript Filesa
 	================================================== -->
 
 		<!-- initialize jQuery Library -->
+
 		<script type="text/javascript" src="{{asset('constra/js/jquery.js')}}"></script>
 		<!-- Bootstrap jQuery -->
 		<script type="text/javascript" src="{{asset('constra/js/bootstrap.min.js')}}"></script>

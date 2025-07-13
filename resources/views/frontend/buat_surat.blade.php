@@ -1,7 +1,7 @@
 @extends('constra_template.master')
 
 @section('title')
-    Surat Kurang Mampu
+    pengajuan surat
 @endsection
 
 @section('content')
@@ -16,11 +16,11 @@
                       <li></li>
                    </ol>
                 </div>
-             </div><!-- Col end -->
-          </div><!-- Row end -->
-       </div><!-- Container end -->
-    </div><!-- Banner text end -->
-</div><!-- Banner area end -->
+             </div>
+          </div>
+       </div>
+    </div>
+</div>
 
 <section id="main-container" class="main-container test">
     <div class="container">
@@ -60,24 +60,63 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="jenis_kelamin">Jenis_kelamin</label>
+                        <input type="text" readonly name="jenis_kelamin" class="form-control" id="jenis_kelamin" value="{{old('jenis_kelamin')}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tempat_lahir">Tempat lahir</label>
+                        <input type="text" readonly name="tempat_lahir" class="form-control" id="tempat_lahir" value="{{old('tempat_lahir')}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tanggal_lahir">Tanggal lahir</label>
+                        <input type="text" readonly name="tanggal_lahir" class="form-control" id="tanggal_lahir" value="{{old('tanggal_lahir')}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status_penduduk">status</label>
+                        <input type="text" readonly name="status_penduduk" class="form-control" id="status_penduduk" value="{{old('status_penduduk')}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pekerjaan">Pekerjaan</label>
+                        <input type="text" readonly name="pekerjaan" class="form-control" id="pekerjaan" value="{{old('pekerjaan')}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dusun">Dusun</label>
+                        <input type="text" readonly name="dusun" class="form-control" id="dusun" value="{{old('dusun')}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="rt">Rt</label>
+                        <input type="text" readonly name="rt" class="form-control" id="rt" value="{{old('rt')}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rw">Rw</label>
+                        <input type="text" readonly name="rw" class="form-control" id="rw" value="{{old('rw')}}">
+                    </div>
+
+                    <div class="form-group">
                         <label for="pilihsurat">Jenis Surat</label>
                         <select name="pilihsurat" class="form-control {{ $errors->first('pilihsurat') ? 'is-invalid' : '' }}" id="pilihsurat">
                             <option value="">Pilih Surat</option>
-                            <option value="Surat Keterangan Tidak Mampu">Surat Keterangan Tidak Mampu</option>
-                            <option value="Surat Keterangan Usaha">Surat Keterangan Usaha</option>
+                            <option value="Surat Keterangan Tidak Mampu" {{ old('pilihsurat') == 'Surat Keterangan Tidak Mampu' ? 'selected' : '' }}>Surat Keterangan Tidak Mampu</option>
+                            <option value="Surat Keterangan Usaha" {{ old('pilihsurat') == 'Surat Keterangan Usaha' ? 'selected' : '' }}>Surat Keterangan Usaha</option>
+                            <option value="Surat Keterangan Domisili" {{ old('pilihsurat') == 'Surat Keterangan Domisili' ? 'selected' : '' }}>Surat Keterangan Domisili</option>
                         </select>
                         <div class="invalid-feedback">
                             {{ $errors->first('pilihsurat') }}
                         </div>
                     </div>
 
-                    <!-- Div untuk syarat Surat Keterangan Tidak Mampu -->
                     <div id="syaratSKTM" style="display:none;">
-                        <div class="form-group">
-                            <label for="foto_ktp">Foto Ktp</label>
+                        {{-- <div class="form-group">
+                            <label for="foto_ktp">Foto KTP</label>
                             <input type="file" class="form-control {{$errors->first('foto_ktp') ? 'is-invalid' : ''}}" id="foto_ktp" name="foto_ktp">
                             <div class="invalid-feedback">
-                                {{$errors->first('fotoktp')}}
+                                {{$errors->first('foto_ktp')}}
                             </div>
                         </div>
 
@@ -87,37 +126,36 @@
                             <div class="invalid-feedback">
                                 {{$errors->first('foto_kk')}}
                             </div>
+                        </div> --}}
+                    </div>
+
+                    <div id="syaratSKU" style="display:none;">
+                        <div class="form-group">
+                        <label for="bidang_usaha">Bidang usaha</label>
+                        <p>Contoh: Pertanian (bidang bawang-bawangan)</p>
+                        <input type="text" name="bidang_usaha" class="form-control {{$errors->first('bidang_usaha') ? 'is-invalid' : ''}}" id="bidang_usaha" value="{{old('bidang_usaha')}}">
+                        <div class="invalid-feedback">
+                            {{$errors->first('bidang_usaha')}}
+
                         </div>
                     </div>
 
-                    <!-- Div untuk syarat Surat Keterangan Usaha -->
-                    <div id="syaratSKU" style="display:none;">
-                        <div class="form-group">
-                            <label for="fotoktp">Foto Ktp</label>
-                            <input type="file" class="form-control {{$errors->first('fotoktp') ? 'is-invalid' : ''}}" id="fotoktp" name="fotoktp">
-                            <div class="invalid-feedback">
-                                {{$errors->first('fotoktp')}}
-                            </div>
-                        </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="fotokk">Foto KK</label>
-                            <input type="file" class="form-control {{$errors->first('fotokk') ? 'is-invalid' : ''}}" id="fotokk" name="fotokk">
-                            <div class="invalid-feedback">
-                                {{$errors->first('fotokk')}}
-                            </div>
-                        </div>
-
+                    <div id="syaratSKD" style="display:none;">
                         {{-- <div class="form-group">
-                            <label for="template_permohonan">Template Surat Permohonan</label>
-                            <p><a href="{{ asset('storage/template_permohonan.docx') }}" download>Download Template</a></p>
+                            <label for="fotoktp_domisili">Foto KTP</label>
+                            <input type="file" class="form-control {{$errors->first('fotoktp_domisili') ? 'is-invalid' : ''}}" id="fotoktp_domisili" name="fotoktp_domisili">
+                            <div class="invalid-feedback">
+                                {{$errors->first('fotoktp_domisili')}}
+                            </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="permohonan">Unggah Surat Permohonan</label>
-                            <input type="file" class="form-control {{$errors->first('permohonan') ? 'is-invalid' : ''}}" id="permohonan" name="permohonan">
+                            <label for="fotokk_domisili">Foto KK</label>
+                            <input type="file" class="form-control {{$errors->first('fotokk_domisili') ? 'is-invalid' : ''}}" id="fotokk_domisili" name="fotokk_domisili">
                             <div class="invalid-feedback">
-                                {{$errors->first('permohonan')}}
+                                {{$errors->first('fotokk_domisili')}}
                             </div>
                         </div> --}}
                     </div>
@@ -132,7 +170,7 @@
 
                     <div class="form-group">
                         <label for="no_hp">Nomor HP</label>
-                        <input type="textarea" name="no_hp" class="form-control {{$errors->first('no_hp') ? 'is-invalid' : ''}}" id="no_hp" value="{{old('no_hp')}}">
+                        <input type="text" name="no_hp" class="form-control {{$errors->first('no_hp') ? 'is-invalid' : ''}}" id="no_hp" value="{{old('no_hp')}}">
                         <div class="invalid-feedback">
                             {{$errors->first('no_hp')}}
                         </div>
@@ -141,6 +179,11 @@
                     <div class="text-right"><br>
                         <button class="btn btn-primary solid blank" type="submit">Buat Surat</button>
                     </div>
+                </form>
+
+                 <!-- Form Logout -->
+                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
                 </form>
             </div>
         </div>
@@ -163,9 +206,28 @@
                 if (data) {
                     $('#no_kk').val(data.no_kk);
                     $('#nama').val(data.nama_lengkap);
+                    $('#jenis_kelamin').val(data.jenis_kelamin);
+                    $('#tempat_lahir').val(data.tempat_lahir);
+                    $('#tanggal_lahir').val(data.tanggal_lahir);
+                    $('#status_penduduk').val(data.status);
+                    $('#pekerjaan').val(data.pekerjaan);
+                    $('#dusun').val(data.dusun);
+                    $('#rt').val(data.rt);
+                    $('#rw').val(data.rw);
+
                 } else {
                     $('#no_kk').val('');
                     $('#nama').val('');
+                    $('#jenis_kelamin').val('');
+                    $('#tempat_lahir').val('');
+                    $('#status_penduduk').val('');
+                    $('#pekerjaan').val('');
+                    $('#dusun').val('');
+                    $('#rt').val('');
+                    $('#rw').val('');
+
+
+
                 }
             },
             error: function(xhr, status, error) {
@@ -178,12 +240,58 @@
         var value = this.value;
         document.getElementById('syaratSKTM').style.display = 'none';
         document.getElementById('syaratSKU').style.display = 'none';
+        document.getElementById('syaratSKD').style.display = 'none';
 
         if (value === 'Surat Keterangan Tidak Mampu') {
             document.getElementById('syaratSKTM').style.display = 'block';
         } else if (value === 'Surat Keterangan Usaha') {
             document.getElementById('syaratSKU').style.display = 'block';
+        } else if (value === 'Surat Keterangan Domisili') {
+            document.getElementById('syaratSKD').style.display = 'block';
         }
     });
+
+    // Durasi untuk logout otomatis (10 detik dalam milidetik)
+    const timeoutDuration = 100000 ; // 10 detik
+    let timeout;
+
+    // Reset timer saat ada aktivitas
+    const resetTimeout = () => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            // Kirim form logout jika waktu habis
+            document.getElementById('logout-form').submit();
+        }, timeoutDuration);
+    };
+
+    // Pendeteksi aktivitas di halaman
+    const activityEvents = ['click', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+    activityEvents.forEach(event => {
+        window.addEventListener(event, resetTimeout);
+    });
+
+    // Mulai timer awal
+    resetTimeout();
+
+    // Logout otomatis jika tidak kembali dalam 10 detik
+    const checkInactive = () => {
+        const lastActivity = sessionStorage.getItem('lastActivity') || Date.now();
+        const currentTime = Date.now();
+
+        // Jika lebih dari timeoutDuration sejak terakhir aktivitas, logout
+        if (currentTime - lastActivity > timeoutDuration) {
+            document.getElementById('logout-form').submit();
+        } else {
+            resetTimeout();
+        }
+    };
+
+    // Simpan waktu terakhir aktivitas ketika meninggalkan halaman
+    window.addEventListener('beforeunload', () => {
+        sessionStorage.setItem('lastActivity', Date.now());
+    });
+
+    // Periksa aktivitas terakhir ketika halaman dimuat
+    document.addEventListener('DOMContentLoaded', checkInactive);
 </script>
 @endpush

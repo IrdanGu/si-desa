@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Theme style -->
+  <link rel="icon" href="{{asset('storage/gambar/logoman.png')}}" type="image/x-icon"/>
   <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('adminlte/plugins/fontawesome-free/css/all.min.css')}}">
@@ -165,6 +166,8 @@
 <script src="{{asset('adminlte')}}/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('adminlte')}}/dist/js/pages/dashboard.js"></script>
+
+
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'level', // Menambahkan kolom role untuk membedakan jenis pengguna
     ];
 
     /**
@@ -37,14 +40,15 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 
+    /**
+     * Determine if the user is an admin.
+     *
+     * @return bool
+     */
     public function isAdmin()
     {
         return $this->level === 'admin';
@@ -59,4 +63,16 @@ class User extends Authenticatable
     {
         return $this->level === 'karangtaruna';
     }
+
+    /**
+     * Determine if the user is a regular user.
+     *
+     * @return bool
+     */
+    public function isUser()
+    {
+        return $this->level === 'user';
+    }
+
+    
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Potensi_desa;
 use App\Models\Surat;
+use App\Models\Surat_KeteranganDomisili;
 use App\Models\Surat_KeteranganUsaha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,17 +19,19 @@ class PotensiDesaController extends Controller
     {
     $surat_ktm =Surat::where('is_read', false)->count();
     $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
+    $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
+    $notifications_sktm = Surat::where('is_read', false)->get();
+    $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+    $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+    $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
 
-     $notifications_sktm = Surat::where('is_read', false)->get();
-     $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-     $notifications = $notifications_sktm->merge($notifications_sku);
 
     $potensi_desa = Potensi_desa::orderBy('judul','desc')->paginate(7);
     $cari = $request->get('keyword');
     if ($cari) {
         $potensi_desa = Potensi_desa::where('judul', 'LIKE', "%$cari%")->paginate(7);
     }
-    return view('potensi_desa.index', compact('potensi_desa', 'surat_ktm', 'surat_ku', 'notifications'));
+    return view('potensi_desa.index', compact('potensi_desa', 'surat_ktm', 'surat_ku','surat_domisili', 'notifications'));
     }
 
     /**
@@ -39,11 +42,15 @@ class PotensiDesaController extends Controller
     {
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
+        $notifications_sktm = Surat::where('is_read', false)->get();
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
 
-         $notifications_sktm = Surat::where('is_read', false)->get();
-         $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-         $notifications = $notifications_sktm->merge($notifications_sku);
-        return view('potensi_desa.create',  compact( 'surat_ktm', 'surat_ku', 'notifications'));
+
+
+        return view('potensi_desa.create',  compact( 'surat_ktm', 'surat_ku','surat_domisili','notifications'));
     }
 
     /**
@@ -90,12 +97,14 @@ class PotensiDesaController extends Controller
     {
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
+        $notifications_sktm = Surat::where('is_read', false)->get();
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
 
-         $notifications_sktm = Surat::where('is_read', false)->get();
-         $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-         $notifications = $notifications_sktm->merge($notifications_sku);
         $potensi_desa = Potensi_desa::where('slug', $slug)->first();
-        return view('potensi_desa.edit', compact('potensi_desa','surat_ktm', 'surat_ku', 'notifications'));
+        return view('potensi_desa.edit', compact('potensi_desa','surat_ktm', 'surat_ku','surat_domisili','notifications'));
     }
 
     /**

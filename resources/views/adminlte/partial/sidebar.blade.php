@@ -66,6 +66,15 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="{{route('kepaladesaindex')}}" class="nav-link">
+                            <i class="nav-icon fas fa-user-cog"></i>
+                            <p>
+                              Kepala desa
+                            </p>
+                          </a>
+                      </li>
+
 
                     <li class="nav-item">
                         <a href="{{route('agendaindex')}}" class="nav-link">
@@ -109,6 +118,15 @@
                           <i class="nav-icon fas fa-mail-bulk"></i>
                             <p>
                               Surat Keterangan Usaha
+                            </p>
+                          </a>
+                      </li>
+
+                      <li class="nav-item">
+                        <a href="{{route('surat_keterangandomisiliindex')}}" class="nav-link">
+                          <i class="nav-icon fas fa-mail-bulk"></i>
+                            <p>
+                              Surat Keterangan Domisili
                             </p>
                           </a>
                       </li>

@@ -49,8 +49,8 @@
               <td>{{ Str::limit(strip_tags($agendas->content), 100) }}</td>
               <td>{{$agendas->user->level}}</td>
               <td>
-              <a  href="{{route('agendaedit',$agendas->judul)}}"><button style="padding-right:26px" type="submit"  class="btn btn-info"><i class="fas fa-edit"></i> Edit</button> </a>
-                <form style="margin-top:2px;" action="{{route('agendadelete',$agendas->judul)}}" method="post" >
+              <a  href="{{route('agendaedit',$agendas->id)}}"><button style="padding-right:26px" type="submit"  class="btn btn-info"><i class="fas fa-edit"></i> Edit</button> </a>
+                <form style="margin-top:2px;" action="{{route('agendadelete',$agendas->id)}}" method="post" >
                   @csrf
                   @method('DELETE')
                   <button onclick="return confirm('Yakin Hapus Data Ini?')" class="btn  btn-danger" type="submit "><i class="fas fa-trash"></i> Hapus</button>

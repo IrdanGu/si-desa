@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agenda;
 use App\Models\Surat;
+use App\Models\Surat_KeteranganDomisili;
 use App\Models\Surat_KeteranganUsaha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,16 +16,18 @@ class AgendaController extends Controller
     {
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
-
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
+
     $agenda = Agenda::orderBy('created_at', 'desc')->paginate(7);
     $cari = $request->get('keyword');
     if ($cari) {
         $agenda = Agenda::where('judul', 'LIKE', "%$cari%")->paginate(7);
     }
-    return view('agenda.index', compact('agenda','surat_ktm', 'surat_ku', 'notifications'));
+    return view('agenda.index', compact('agenda','surat_ktm', 'surat_ku','surat_domisili','notifications'));
 
     }
 
@@ -36,10 +39,13 @@ class AgendaController extends Controller
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
 
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
-        return view('agenda.create', compact('surat_ktm', 'surat_ku', 'notifications'));
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
+
+        return view('agenda.create', compact('surat_ktm', 'surat_ku','surat_domisili','notifications'));
 
     }
 
@@ -48,9 +54,10 @@ class AgendaController extends Controller
      */
     public function store(Request $request)
     {
-        $judul = $request->get('judul');
+        $id = $request->get('id');
         $agenda = new Agenda;
-        $agenda->judul = $judul;
+        $agenda->id = $id;
+        $agenda->judul = $request->get('judul');
         $agenda->tanggal = date('Y-m-d', strtotime($request->get('tanggal')));
         $agenda->jam = $request->get('jam');
         $agenda->acara = $request->get('acara');
@@ -74,28 +81,30 @@ class AgendaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($judul)
+    public function edit($id)
     {
 
         $surat_ktm =Surat::where('is_read', false)->count();
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
 
+        $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
         $notifications_sktm = Surat::where('is_read', false)->get();
-        $notifications_sku = Surat_KeteranganUsaha::where('is_read', false)->get();
-        $notifications = $notifications_sktm->merge($notifications_sku);
-        $agenda = Agenda::where('judul', $judul)->first();
-        return view('agenda.edit', compact('agenda','surat_ktm', 'surat_ku', 'notifications'));
+        $notifications_ku = Surat_KeteranganUsaha::where('is_read', false)->get();
+        $notifications_domisili = Surat_KeteranganDomisili::where('is_read', false)->get();
+        $notifications = $notifications_sktm->merge($notifications_ku)->merge($notifications_domisili);
+
+        $agenda = Agenda::findOrFail($id);
+        return view('agenda.edit', compact('agenda','surat_ktm', 'surat_ku','surat_domisili','notifications'));
 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $judul)
+    public function update(Request $request, $id)
     {
-        $judul = $request->get('judul');
-        $agenda = Agenda::where('judul', $judul)->first();
-        $agenda->judul = $judul;
+        $agenda = Agenda::where('id', $id)->first();
+        $agenda->judul = $request->get('judul');
         $agenda->tanggal = date('Y-m-d', strtotime($request->get('tanggal')));
         $agenda->jam = $request->get('jam');
         $agenda->acara = $request->get('acara');

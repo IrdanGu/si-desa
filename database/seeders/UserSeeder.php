@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 
 class UserSeeder extends Seeder
 {
@@ -13,12 +14,20 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Cek struktur tabel terlebih dahulu
+        $columns = Schema::getColumnListing('users');
+        $roleColumn = in_array('level', $columns) ? 'level' : (in_array('role', $columns) ? 'role' : null);
+        
+        if (!$roleColumn) {
+            throw new \Exception('Neither level nor role column found in users table');
+        }
+
         // Admin Default
         User::create([
             'name' => 'Admin SI-DESA',
             'email' => 'admin@sidesa.com',
             'password' => Hash::make('admin123'),
-            'level' => 'admin'
+            $roleColumn => 'admin'
         ]);
 
         // User Irdan
@@ -26,7 +35,7 @@ class UserSeeder extends Seeder
             'name' => 'Irdan',
             'email' => 'irdan@gmail.com',
             'password' => Hash::make('irdan123'),
-            'level' => 'admin'
+            $roleColumn => 'admin'
         ]);
 
         // Karang Taruna
@@ -34,7 +43,7 @@ class UserSeeder extends Seeder
             'name' => 'Karang Taruna',
             'email' => 'karangtaruna@sidesa.com',
             'password' => Hash::make('karangtaruna123'),
-            'level' => 'karangtaruna'
+            $roleColumn => 'karangtaruna'
         ]);
 
         // User Biasa
@@ -42,7 +51,7 @@ class UserSeeder extends Seeder
             'name' => 'User Demo',
             'email' => 'user@sidesa.com',
             'password' => Hash::make('user123'),
-            'level' => 'user'
+            $roleColumn => 'user'
         ]);
     }
 }

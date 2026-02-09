@@ -119,9 +119,9 @@ class AgendaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($judul)
+    public function destroy($id)
     {
-        $agenda = Agenda::where('judul', $judul)->first();
+        $agenda = Agenda::findOrFail($id);
         $agenda->delete();
         return redirect()->route('agendaindex');
     }

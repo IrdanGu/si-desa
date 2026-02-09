@@ -117,7 +117,7 @@ class AgendaKarangtarunaController extends Controller
      */
     public function destroy($id)
     {
-        $agenda_karangtaruna = Agenda_karangtaruna::where('judul', $id)->first();
+        $agenda_karangtaruna = Agenda_karangtaruna::findOrFail($id);
         $agenda_karangtaruna->delete();
         return redirect()->route('agenda_karangtarunaindex');
     }

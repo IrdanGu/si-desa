@@ -4,8 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class Admin
 {
@@ -16,11 +16,14 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth()->user()->level == 'admin'){
-         return $next($request);
-
+        if (!Auth::check()) {
+            return redirect('/login');
         }
-        return redirect('/dashboard');
 
+        if (Auth::user()->level === 'admin') {
+            return $next($request);
+        }
+
+        return redirect('/dashboard')->with('error', 'You do not have access.');
     }
 }

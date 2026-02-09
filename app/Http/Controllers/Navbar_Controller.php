@@ -1,14 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\MailNotify;
 
 use App\Models\Surat;
 use App\Models\Surat_KeteranganDomisili;
 use App\Models\Surat_KeteranganUsaha;
 use Illuminate\Http\Request;
-use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 
 class Navbar_Controller extends Controller
@@ -36,8 +33,11 @@ class Navbar_Controller extends Controller
         $surat_ku = Surat_KeteranganUsaha::where('is_read', false)->count();
         $surat_domisili = Surat_KeteranganDomisili::where('is_read', false)->count();
 
-
-        return response()->json(['surat_ktm' => $surat_ktm], ['surat_ku' => $surat_ku], ['surat_domisili' => $surat_domisili]);
+        return response()->json([
+            'surat_ktm' => $surat_ktm,
+            'surat_ku' => $surat_ku,
+            'surat_domisili' => $surat_domisili,
+        ]);
     }
 
     public function markNotificationAsRead(Request $request)

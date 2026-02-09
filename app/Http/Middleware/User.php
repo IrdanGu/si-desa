@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class User
@@ -15,11 +16,15 @@ class User
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->level=='user'){
-         return $next($request);
-
+        if (!Auth::check()) {
+            return redirect('/login');
         }
-        return redirect('surat');
+
+        if (Auth::user()->level === 'user') {
+            return $next($request);
+        }
+
+        return redirect('/dashboard')->with('error', 'You do not have access.');
     }
 
 }

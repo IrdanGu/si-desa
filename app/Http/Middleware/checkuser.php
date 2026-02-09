@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-use Illuminate\Foundation\Auth;
+
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
@@ -17,25 +17,14 @@ class checkuser
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Pastikan pengguna sudah diautentikasi
-        if (FacadesAuth::check()) {
-            // Izinkan akses untuk admin ke semua rute
-            if (Auth()->user()->level == 'admin') {
-                return $next($request);
-            }
-
-            // Izinkan akses untuk karangtaruna ke rute tertentu
-            if (Auth()->user()->level == 'karangtaruna') {
-                return $next($request);
-            }
-
-             // Izinkan akses untuk karangtaruna ke rute tertentu
-             if (Auth()->user()->level == 'user') {
-                return $next($request);
-            }
+        if (!FacadesAuth::check()) {
+            return redirect('/login');
         }
 
-        // Arahkan pengguna non-admin atau non-'karangtaruna' ke /dashboard
+        if (in_array(FacadesAuth::user()->level, ['admin', 'karangtaruna', 'user'], true)) {
+            return $next($request);
+        }
+
         return redirect('/dashboard')->with('error', 'You do not have access.');
     }
 }

@@ -43,7 +43,7 @@ class DashboardController extends Controller
         $rt01 = Penduduk::where('rt', '01')->count();
         $rt02 = Penduduk::where('rt', '02')->count();
         $rt03 = Penduduk::where('rt', '03')->count();
-        $rt04 = Penduduk::where('rt', '02')->count();
+        $rt04 = Penduduk::where('rt', '04')->count();
         $rt05 = Penduduk::where('rt', '05')->count();
         $rt06 = Penduduk::where('rt', '06')->count();
         $rt07 = Penduduk::where('rt', '07')->count();

@@ -4,8 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models;
 
 class Karangtaruna
 {
@@ -16,11 +16,15 @@ class Karangtaruna
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->level=='karangtaruna'){
-         return $next($request);
-
+        if (!Auth::check()) {
+            return redirect('/login');
         }
-        return redirect('/agenda_karangtaruna/index');
+
+        if (Auth::user()->level === 'karangtaruna') {
+            return $next($request);
+        }
+
+        return redirect('/dashboard')->with('error', 'You do not have access.');
     }
 
 }
